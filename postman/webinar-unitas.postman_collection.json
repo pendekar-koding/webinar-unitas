@@ -1,0 +1,134 @@
+{
+	"info": {
+		"_postman_id": "39525a3b-f8b8-49ac-8c67-4849844ef864",
+		"name": "webinar-unitas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "cutomer",
+			"item": [
+				{
+					"name": "save",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nama\":\"customer-1\",\r\n    \"mobilePhone\":\"0857777777\",\r\n    \"email\":\"customer1@mail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/webinar/customer/save",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"webinar",
+								"customer",
+								"save"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getList",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/webinar/customer/list",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"webinar",
+								"customer",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/webinar/customer/id/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"webinar",
+								"customer",
+								"id",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":1,\r\n    \"nama\":\"customer-1\",\r\n    \"mobilePhone\":\"085000000\",\r\n    \"email\":\"customer1@mail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/webinar/customer/save",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"webinar",
+								"customer",
+								"save"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/webinar/customer/delete/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"webinar",
+								"customer",
+								"delete",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

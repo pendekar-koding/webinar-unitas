@@ -10,7 +10,7 @@ public interface CommonService<T, Z> {
 
     Long getNum();
 
-    T save(T entity) throws StudyException;
+    T save(T wrapper) throws StudyException;
 
     T getById(Z pk) throws StudyException;
 

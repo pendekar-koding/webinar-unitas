@@ -1,7 +1,7 @@
 package com.webinar.unindra.demo.common.response;
 
 
-import com.example.crud.springbootcrud.common.controller.BaseController;
+import com.webinar.unindra.demo.common.controller.BaseController;
 
 public class CommonResponses<T> extends BaseController {
 

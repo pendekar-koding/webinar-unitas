@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+    <!--Appender to stdout-->
+    <appender name="stdout" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <!-- Pattern to output the caller's file name and line number -->
+            <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %5p [%t] (%c) : %m%n"/>
+        </layout>
+    </appender>
+
+    <!--Appender to INFO-->
+    <appender name="F" class="org.apache.log4j.RollingFileAppender">
+        <param name="file" value="logs/rmt-web.log"/>
+        <param name="MaxFileSize" value="2MB"/>
+        <!-- Keep one backup file -->
+        <param name="MaxBackupIndex" value="1"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} - %p - [%c:%L] : %m%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="levelMin" value="INFO"/>
+            <param name="levelMax" value="INFO"/>
+        </filter>
+    </appender>
+
+    <!--Appender to ERROR-->
+    <appender name="E" class="org.apache.log4j.RollingFileAppender">
+        <param name="file" value="logs/rmt-web_err.log"/>
+        <param name="MaxFileSize" value="2MB"/>
+        <!-- Keep one backup file -->
+        <param name="MaxBackupIndex" value="1"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} - %p - [%c:%L] : %m%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="levelMin" value="ERROR"/>
+            <param name="levelMax" value="ERROR"/>
+        </filter>
+    </appender>
+
+    <logger name="com.webinar.unindra.demo">
+        <level value="INFO"/>
+        <appender-ref ref="stdout"/>
+        <appender-ref ref="F"/>
+        <appender-ref ref="E"/>
+    </logger>
+    <logger name="org.hibernate">
+        <level value="ERROR"/>
+        <appender-ref ref="stdout"/>
+        <appender-ref ref="E"/>
+    </logger>
+
+    <logger name="freemarker.cache">
+        <level value="ERROR"/>
+        <appender-ref ref="stdout"/>
+        <appender-ref ref="E"/>
+    </logger>
+
+    <root>
+        <priority value="debug"/>
+        <appender-ref ref="stdout"/>
+        <appender-ref ref="F"/>
+        <appender-ref ref="E"/>
+    </root>
+</log4j:configuration>
