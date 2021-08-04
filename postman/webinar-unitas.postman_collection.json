@@ -127,6 +127,215 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "getPageable",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/webinar/customer/pageableList?pageSize=10&startPage=0&sortOrder=ASC&sortBy=id&sSearch=",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"webinar",
+								"customer",
+								"pageableList"
+							],
+							"query": [
+								{
+									"key": "pageSize",
+									"value": "10"
+								},
+								{
+									"key": "startPage",
+									"value": "0"
+								},
+								{
+									"key": "sortOrder",
+									"value": "ASC"
+								},
+								{
+									"key": "sortBy",
+									"value": "id"
+								},
+								{
+									"key": "sSearch",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "paket",
+			"item": [
+				{
+					"name": "save",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"namaPaket\":\"paket-2\",\r\n    \"harga\": 9000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/webinar/paket/save",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"webinar",
+								"paket",
+								"save"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/webinar/paket/id/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"webinar",
+								"paket",
+								"id",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getList",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/webinar/paket/list",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"webinar",
+								"paket",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":1,\r\n    \"namaPaket\":\"paket-Komplit\",\r\n    \"harga\": 20000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/webinar/paket/save",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"webinar",
+								"paket",
+								"save"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/webinar/paket/delete/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"webinar",
+								"paket",
+								"delete",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPageable",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/webinar/paket/pageableList?pageSize=10&startPage=0&sortOrder=ASC&sortBy=id&sSearch=",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"webinar",
+								"paket",
+								"pageableList"
+							],
+							"query": [
+								{
+									"key": "pageSize",
+									"value": "10"
+								},
+								{
+									"key": "startPage",
+									"value": "0"
+								},
+								{
+									"key": "sortOrder",
+									"value": "ASC"
+								},
+								{
+									"key": "sortBy",
+									"value": "id"
+								},
+								{
+									"key": "sSearch",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
