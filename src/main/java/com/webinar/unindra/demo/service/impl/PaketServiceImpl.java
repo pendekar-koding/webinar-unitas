@@ -106,7 +106,7 @@ public class PaketServiceImpl implements PaketService {
     @Override
     public Page<PaketWrapper> getPageableList(String sSearch, int startPage, int pageSize, Sort sort) throws StudyException {
         int page = DataTableObject.getPageFromStartAndLength(startPage, pageSize);
-        Pageable pageable = PageRequest.of(page, pageSize);
+        Pageable pageable = PageRequest.of(page, pageSize, sort);
         if (paketRepository.count() == 0){
             return new PageImpl<>(new ArrayList<>(), pageable, 0);
         } else {

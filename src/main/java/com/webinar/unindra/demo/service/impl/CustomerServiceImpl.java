@@ -108,13 +108,14 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Page<CustomerWrapper> getPageableList(String sSearch, int startPage, int pageSize, Sort sort) throws StudyException {
         int page = DataTableObject.getPageFromStartAndLength(startPage, pageSize);
-        Pageable pageable = PageRequest.of(page, pageSize);
-        if (customerRepository.count() == 0){
+        Pageable pageable = PageRequest.of(page, pageSize, sort);
+        //hsql query contains deleted = false, we need to manipulate the result in case the database table empty
+        if (customerRepository.count() == 0) {
             return new PageImpl<>(new ArrayList<>(), pageable, 0);
         } else {
-            Page<Customer> customerPage = customerRepository.getPageable(sSearch, pageable);
-            List<CustomerWrapper> wrapperList = toWrapperList(customerPage.getContent());
-            return new PageImpl<>(wrapperList, pageable, customerPage.getTotalElements());
+            Page<Customer> pageableModel = customerRepository.getPageable(sSearch, pageable);
+            List<CustomerWrapper> wrapperList = toWrapperList(pageableModel.getContent());
+            return new PageImpl<>(wrapperList, pageable, pageableModel.getTotalElements());
         }
     }
 }

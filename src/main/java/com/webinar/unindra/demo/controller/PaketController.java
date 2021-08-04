@@ -6,6 +6,8 @@ import com.webinar.unindra.demo.common.response.CommonResponses;
 import com.webinar.unindra.demo.common.response.CustomReturn;
 import com.webinar.unindra.demo.service.PaketService;
 import com.webinar.unindra.demo.wrapper.PaketWrapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -65,6 +67,22 @@ public class PaketController extends BaseController {
             return commonResponses.commonDeleteSuccess();
         } else {
             return commonResponses.commonFailedResponse();
+        }
+    }
+
+    @GetMapping(value = "/pageableList")
+    public CustomReturn<Page<PaketWrapper>> pageableList(String sSearch, Integer pageSize, Integer startPage, String sortBy, String sortOrder) throws StudyException{
+        CommonResponses<Page<PaketWrapper>> commonResponses = new CommonResponses<>();
+        Sort sort = new Sort(Sort.Direction.fromString(sortOrder), sortBy);
+        Page<PaketWrapper>wrapperPage = paketService.getPageableList(sSearch, startPage, pageSize, sort);
+        try {
+            if (wrapperPage != null){
+                return commonResponses.commonSuccessResponse(wrapperPage);
+            } else {
+                return commonResponses.commonFailedResponse();
+            }
+        } catch (Exception e){
+            return commonResponses.commonFailedError();
         }
     }
 }
