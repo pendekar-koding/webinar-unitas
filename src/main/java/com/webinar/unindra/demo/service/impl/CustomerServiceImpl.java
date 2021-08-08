@@ -30,7 +30,7 @@ public class CustomerServiceImpl implements CustomerService {
         wrapper.setVersion(entity.getVersion());
         wrapper.setDeleted(entity.getDeleted());
 
-        wrapper.setNama(entity.getNama());
+        wrapper.setName(entity.getName());
         wrapper.setEmail(entity.getEmail());
         wrapper.setMobilePhone(entity.getMobilePhone());
 
@@ -49,7 +49,7 @@ public class CustomerServiceImpl implements CustomerService {
         entity.setDeleted(wrapper.getDeleted());
         entity.setVersion(wrapper.getVersion());
 
-        entity.setNama(wrapper.getNama());
+        entity.setName(wrapper.getName());
         entity.setEmail(wrapper.getEmail());
         entity.setMobilePhone(wrapper.getMobilePhone());
 

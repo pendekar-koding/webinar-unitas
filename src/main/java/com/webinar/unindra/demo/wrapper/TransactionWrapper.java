@@ -4,11 +4,11 @@ import com.webinar.unindra.demo.common.wrapper.ReferenceBaseWrapper;
 
 import java.math.BigDecimal;
 
-public class TransaksiWrapper extends ReferenceBaseWrapper {
+public class TransactionWrapper extends ReferenceBaseWrapper {
 
-    private String kodeTransaksi;
-    private Integer jumlah;
-    private BigDecimal totalHarga;
+    private String codeTransaction;
+    private Integer total;
+    private BigDecimal totalPrice;
 
 //    private Customer customer;
     private Long idCustomer;
@@ -18,28 +18,28 @@ public class TransaksiWrapper extends ReferenceBaseWrapper {
     private Long idPaket;
     private String namaPaket;
 
-    public String getKodeTransaksi() {
-        return kodeTransaksi;
+    public String getCodeTransaction() {
+        return codeTransaction;
     }
 
-    public void setKodeTransaksi(String kodeTransaksi) {
-        this.kodeTransaksi = kodeTransaksi;
+    public void setCodeTransaction(String codeTransaction) {
+        this.codeTransaction = codeTransaction;
     }
 
-    public Integer getJumlah() {
-        return jumlah;
+    public Integer getTotal() {
+        return total;
     }
 
-    public void setJumlah(Integer jumlah) {
-        this.jumlah = jumlah;
+    public void setTotal(Integer total) {
+        this.total = total;
     }
 
-    public BigDecimal getTotalHarga() {
-        return totalHarga;
+    public BigDecimal getTotalPrice() {
+        return totalPrice;
     }
 
-    public void setTotalHarga(BigDecimal totalHarga) {
-        this.totalHarga = totalHarga;
+    public void setTotalPrice(BigDecimal totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     public Long getIdCustomer() {

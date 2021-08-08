@@ -10,17 +10,17 @@ import javax.persistence.Table;
 @Table(name = "customer")
 public class Customer extends ReferenceBase {
 
-    private String nama;
+    private String name;
     private String mobilePhone;
     private String email;
 
-    @Column(name = "nama", length = 30, nullable = false)
-    public String getNama() {
-        return nama;
+    @Column(name = "name", length = 30, nullable = false)
+    public String getName() {
+        return name;
     }
 
-    public void setNama(String nama) {
-        this.nama = nama;
+    public void setName(String name) {
+        this.name = name;
     }
     @Column(name = "mobile_phone", length = 15, nullable = false)
     public String getMobilePhone() {

@@ -11,6 +11,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CustomerRepository extends CrudRepository<Customer, Long> {
 
-    @Query(value = "select c from Customer c where c.description like %:sSearch% or c.nama like %:sSearch% or c.mobilePhone like %:sSearch%")
+    @Query(value = "select c from Customer c where c.description like %:sSearch% or c.name like %:sSearch% or c.mobilePhone like %:sSearch%")
     Page<Customer> getPageable(@Param("sSearch") String sSearch, Pageable pageable);
 }
