@@ -110,9 +110,9 @@ public class PackageServiceImpl implements PackageService {
         if (packageRepository.count() == 0){
             return new PageImpl<>(new ArrayList<>(), pageable, 0);
         } else {
-            Page<Package> paketPage = packageRepository.getPageable(sSearch, pageable);
-            List<PackageWrapper> packageWrapperList = toWrapperList(paketPage.getContent());
-            return new PageImpl<>(packageWrapperList, pageable, paketPage.getTotalElements());
+            Page<Package> packagePage = packageRepository.getPageable(sSearch, pageable);
+            List<PackageWrapper> packageWrapperList = toWrapperList(packagePage.getContent());
+            return new PageImpl<>(packageWrapperList, pageable, packagePage.getTotalElements());
         }
     }
 }

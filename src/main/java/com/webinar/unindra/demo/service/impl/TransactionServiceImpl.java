@@ -16,10 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class TransactionServiceImpl implements TransactionService {
@@ -27,7 +24,8 @@ public class TransactionServiceImpl implements TransactionService {
     private final TransactionRepository transactionRepository;
     private final CustomerRepository customerRepository;
     private final PackageRepository packageRepository;
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    private static final String DATE_FORMAT= "yyyy-MM-dd";
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_FORMAT);
 
     public TransactionServiceImpl(TransactionRepository transactionRepository, CustomerRepository customerRepository, PackageRepository packageRepository) {
         this.transactionRepository = transactionRepository;
@@ -97,30 +95,11 @@ public class TransactionServiceImpl implements TransactionService {
         return rList;
     }
 
-    private Page<Transaction> getFilterByDate(String startDate, String endDate, Pageable pageable) throws ParseException {
-        Date startDay = simpleDateFormat.parse(startDate);
-        Date endDay = simpleDateFormat.parse(endDate);
-        return transactionRepository.getPageableByDate(startDay, endDay, pageable);
-    }
-
-    @Override
-    public Page<TransactionWrapper> getPageableByDate(String startDate, String endDate, int startPage, int pageSize, Sort sort) throws StudyException, ParseException {
-        int page = DataTableObject.getPageFromStartAndLength(startPage, pageSize);
-        Pageable pageable = PageRequest.of(page, pageSize, sort);
-        Page<Transaction> transaksiPage = getFilterByDate(startDate, endDate, pageable);
-        List<TransactionWrapper> transactionWrappers =toWrapperList(transaksiPage.getContent());
-        return new PageImpl<>(transactionWrappers, pageable, transaksiPage.getTotalElements());
-    }
-
-    @Override
-    public Long getNum() {
-        return transactionRepository.count();
-    }
 
     @Override
     public TransactionWrapper save(TransactionWrapper wrapper) throws StudyException {
-        wrapper.setVersion(1);
         wrapper.setDeleted(false);
+        wrapper.setVersion(1);
         return toWrapper(transactionRepository.save(toEntity(wrapper)));
     }
 
@@ -136,7 +115,7 @@ public class TransactionServiceImpl implements TransactionService {
             transactionRepository.deleteById(pk);
             return true;
         } catch (Exception e){
-            throw new StudyException(e, ErrorCode.GENERIC_FAILURE);
+            throw  new StudyException(e,ErrorCode.GENERIC_FAILURE);
         }
     }
 
@@ -145,22 +124,17 @@ public class TransactionServiceImpl implements TransactionService {
         return toWrapperList((List<Transaction>) transactionRepository.findAll());
     }
 
-    @Override
-    public void deleteAll() throws StudyException {
-        //Not Implement yet
-
+    private Page<Transaction> getFiterByDate(String startDay, String endDay, Pageable pageable) throws ParseException {
+        Date startDate = simpleDateFormat.parse(startDay);
+        Date endDate = simpleDateFormat.parse(endDay);
+        return transactionRepository.getPageableByDate(startDate, endDate, pageable);
     }
-
     @Override
-    public Page<TransactionWrapper> getPageableList(String sSearch, int startPage, int pageSize, Sort sort) throws StudyException {
+    public Page<TransactionWrapper> getPageableByDate(String startDate, String endDate, int startPage, int pageSize, Sort sort) throws StudyException, ParseException {
         int page = DataTableObject.getPageFromStartAndLength(startPage, pageSize);
         Pageable pageable = PageRequest.of(page, pageSize, sort);
-        if (transactionRepository.count() == 0){
-            return new PageImpl<>(new ArrayList<>(), pageable, 0);
-        } else {
-            Page<Transaction> transaksiPage = transactionRepository.getPageable(sSearch, pageable);
-            List<TransactionWrapper> wrappers = toWrapperList(transaksiPage.getContent());
-            return new PageImpl<>(wrappers, pageable, transaksiPage.getTotalElements());
-        }
+        Page<Transaction> transactionPage = getFiterByDate(startDate, endDate, pageable);
+        List<TransactionWrapper> wrapperList = toWrapperList(transactionPage.getContent());
+        return new PageImpl<>(wrapperList, PageRequest.of(page, pageSize, sort), transactionPage.getTotalElements());
     }
 }

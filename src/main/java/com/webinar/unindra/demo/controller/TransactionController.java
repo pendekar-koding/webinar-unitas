@@ -5,6 +5,7 @@ import com.webinar.unindra.demo.common.exception.StudyException;
 import com.webinar.unindra.demo.common.response.CommonResponses;
 import com.webinar.unindra.demo.common.response.CustomReturn;
 import com.webinar.unindra.demo.service.TransactionService;
+import com.webinar.unindra.demo.wrapper.PackageWrapper;
 import com.webinar.unindra.demo.wrapper.TransactionWrapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
@@ -71,30 +72,14 @@ public class TransactionController extends BaseController {
         }
     }
 
-    @GetMapping(value = "/pageableList")
-    public CustomReturn<Page<TransactionWrapper>> pageableList(String sSearch, Integer pageSize, Integer startPage, String sortBy, String sortOrder) throws StudyException{
+    @GetMapping(value = "/getPageableByDate")
+    public CustomReturn<Page<TransactionWrapper>> getPageableByDate(String startDate, String endDate, Integer pageSize, Integer startPage, String sortBy, String sortOrder) throws StudyException, ParseException {
         CommonResponses<Page<TransactionWrapper>> commonResponses = new CommonResponses<>();
         Sort sort = new Sort(Sort.Direction.fromString(sortOrder), sortBy);
-        Page<TransactionWrapper>wrapperPage = transactionService.getPageableList(sSearch, startPage, pageSize, sort);
+        Page<TransactionWrapper> wrappers = transactionService.getPageableByDate(startDate, endDate, startPage, pageSize, sort);
         try {
-            if (wrapperPage != null){
-                return commonResponses.commonSuccessResponse(wrapperPage);
-            } else {
-                return commonResponses.commonFailedResponse();
-            }
-        } catch (Exception e){
-            return commonResponses.commonFailedError();
-        }
-    }
-
-    @GetMapping(value = "/pageableByDate")
-    public CustomReturn<Page<TransactionWrapper>> pageableByDate(String startDate, String endDate, Integer pageSize, Integer startPage, String sortBy, String sortOrder) throws StudyException, ParseException {
-        CommonResponses<Page<TransactionWrapper>> commonResponses = new CommonResponses<>();
-        Sort sort = new Sort(Sort.Direction.fromString(sortOrder), sortBy);
-        Page<TransactionWrapper>wrapperPage = transactionService.getPageableByDate(startDate, endDate, startPage, pageSize, sort);
-        try {
-            if (wrapperPage != null){
-                return commonResponses.commonSuccessResponse(wrapperPage);
+            if (wrappers != null){
+                return commonResponses.commonSuccessResponse(wrappers);
             } else {
                 return commonResponses.commonFailedResponse();
             }
